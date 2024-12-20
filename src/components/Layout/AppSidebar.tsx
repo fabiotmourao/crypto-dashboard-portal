@@ -20,7 +20,13 @@ const exchanges = [
 ];
 
 export function AppSidebar() {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, isMobile, setOpenMobile } = useSidebar();
+
+  const handleMenuClick = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+  };
 
   return (
     <Sidebar>
@@ -45,7 +51,10 @@ export function AppSidebar() {
                     asChild
                     className="hover:bg-gray-100 transition-colors duration-200"
                   >
-                    <Link to={`/exchange/${exchange.id}`}>
+                    <Link 
+                      to={`/exchange/${exchange.id}`}
+                      onClick={handleMenuClick}
+                    >
                       <exchange.icon className="h-5 w-5" />
                       <span>{exchange.name}</span>
                     </Link>
